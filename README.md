@@ -1,4 +1,5 @@
-# images
+# images-repository
+an Images Repository, in the Cloud with Imgur API. Also, this project was built with Vue3.
 
 ## Project setup
 ```
