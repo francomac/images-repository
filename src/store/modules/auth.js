@@ -1,25 +1,25 @@
 import apiImgur from "../../api/imgur";
 
-const namespaced = true;
-const state = {
-  token: null,
-};
-const getters = {
-  isLoggedIn: (state) => !!state.token,
-};
-const mutations = {
-  SET_TOKEN: (state, token) => {
-    state.token = token;
+export default ({
+  namespaced: true,
+  state: {
+    token: null,
   },
-};
-const actions = {
-  // finalizeLogin: ({ commit, dispatch }) => {},
-  logout: ({ commit }) => {
-    commit("SET_TOKEN", null);
+  getters: {
+    isLoggedIn: (state) => !!state.token,
   },
-  login: () => {
-    apiImgur.login();
+  mutations: {
+    SET_TOKEN: (state, token) => {
+      state.token = token;
+    },
   },
-};
-
-export default { namespaced, state, getters, mutations, actions };
+  actions: {
+    // finalizeLogin: ({ commit, dispatch }) => {},
+    logout: ({ commit }) => {
+      commit("SET_TOKEN", null);
+    },
+    login: () => {
+      apiImgur.login();
+    },
+  },
+});
