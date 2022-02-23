@@ -1,4 +1,5 @@
 import apiImgur from "../../api/imgur";
+import qs from 'qs'
 
 export default ({
   namespaced: true,
@@ -14,7 +15,11 @@ export default ({
     },
   },
   actions: {
-    // finalizeLogin: ({ commit, dispatch }) => {},
+    finalizeLogin: ({ commit }, hash) => {
+      const hashObject = qs.parse(hash.replace('#', ''));
+
+      commit("SET_TOKEN", hashObject.access_token);
+    },
     logout: ({ commit }) => {
       commit("SET_TOKEN", null);
     },
