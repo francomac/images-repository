@@ -23,6 +23,7 @@ export default {
     },
     logout: ({ commit }) => {
       commit("SET_TOKEN", null);
+      window.localStorage.removeItem('imgur_token')
     },
     login: () => {
       apiImgur.login();
