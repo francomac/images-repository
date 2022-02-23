@@ -1,10 +1,10 @@
 import apiImgur from "../../api/imgur";
-import qs from 'qs'
+import qs from "qs";
 
-export default ({
+export default {
   namespaced: true,
   state: {
-    token: null,
+    token: window.localStorage.getItem("imgur_token") || null,
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
@@ -16,9 +16,10 @@ export default ({
   },
   actions: {
     finalizeLogin: ({ commit }, hash) => {
-      const hashObject = qs.parse(hash.replace('#', ''));
+      const hashObject = qs.parse(hash.replace("#", ""));
 
       commit("SET_TOKEN", hashObject.access_token);
+      window.localStorage.setItem('imgur_token', hashObject.access_token)
     },
     logout: ({ commit }) => {
       commit("SET_TOKEN", null);
@@ -27,4 +28,4 @@ export default ({
       apiImgur.login();
     },
   },
-});
+};
