@@ -1,4 +1,5 @@
 import api from "../../api/imgur";
+import router from '../../router/'
 
 export default {
   namespaced: true,
@@ -14,12 +15,17 @@ export default {
     },
   },
   actions: {
-    fetchImages: async({ commit, rootState }) => {
+    fetchImages: async ({ commit, rootState }) => {
       const { token } = rootState.auth;
       const response = await api.fetchImages(token);
 
-      commit('SET_IMAGES', response.data.data)
+      commit("SET_IMAGES", response.data.data);
     },
-    // uploadImage: ({ commit }) => {},
+    uploadImages: async ({ rootState }, images) => {
+      const { token } = rootState.auth;
+      await api.uploadImages(images, token);
+
+      router.push('/')
+    },
   },
 };

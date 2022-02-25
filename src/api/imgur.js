@@ -21,7 +21,23 @@ const fetchImages = (token) => {
   });
 };
 
+const uploadImages = async (images, token) => {
+  const promises = Array.from(images).map((image) => {
+    const formData = new FormData();
+    formData.append("image", image);
+
+    return axios.post(`${ROOT_URL}/3/upload`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  });
+
+  return Promise.all(promises);
+};
+
 export default {
   login,
   fetchImages,
+  uploadImages,
 };
